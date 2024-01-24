@@ -1,17 +1,44 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+interface Shape{
+    void draw();
+}
+class Square implements Shape{
+    @Override
+    public void draw() {
+        System.out.println("Inside square class:: draw");
+    }
+}
+
+class Rectangle implements Shape{
+    @Override
+    public void draw() {
+        System.out.println("Inside rectangle class:: draw");
+    }
+}
+
+
+class ShapeFatory{
+    public Shape getShape(String shapeType){
+        if(shapeType == null){
+            return null;
+        }
+
+        if(shapeType.equalsIgnoreCase("RECTANGLE")) {
+            return new Rectangle();
+        } else if(shapeType.equalsIgnoreCase("SQUARE")){
+            return new Square();
+        }
+
+        return null;
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        ShapeFatory shapeFatory = new ShapeFatory();
+        Shape square = shapeFatory.getShape("square");
+        Shape rectangle = shapeFatory.getShape("rectangle");
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+        square.draw();
+        rectangle.draw();
     }
 }
